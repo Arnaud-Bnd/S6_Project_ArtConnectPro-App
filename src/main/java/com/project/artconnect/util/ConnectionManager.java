@@ -19,7 +19,6 @@ public class ConnectionManager {
      * @throws SQLException if connection fails
      */
     public static Connection getConnection() throws SQLException {
-        // TODO: Students should implement this using DatabaseConfig properties
         return DriverManager.getConnection(DatabaseConfig.URL, DatabaseConfig.USER, DatabaseConfig.PASSWORD);
         // throw new UnsupportedOperationException("Database connection logic not yet implemented.");
     }

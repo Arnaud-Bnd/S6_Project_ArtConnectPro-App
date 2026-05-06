@@ -28,17 +28,21 @@ The application runs "out-of-the-box" using **In-Memory Services** (`InMemoryArt
 
 ## OOP-First Design (Object-Oriented Programming)
 Unlike typical database-centric skeletons, ArtConnect Pro follows strict OOP best practices:
-- **No Explicit IDs**: Model classes (`Artist`, `Artwork`, etc.) do **not** have `id` fields. In Java, an object's identity is its memory address/reference, not a numeric ID.
+- **Explicit IDs in Models**: Model classes (`Artist`, `Artwork`, etc.) include a `Long id` field to map cleanly to relational primary keys.
 - **Direct Object References**: Relationships are modeled using direct references. For example, an `Artwork` object holds a reference to an `Artist` object, not an `artistId`.
 - **Bidirectional Links**: Many relationships are bidirectional (e.g., an `Artist` has a `List<Artwork>`, and each `Artwork` points back to its `Artist`).
 - **No Junction Tables**: Many-to-Many relationships (like Exhibitions and Artworks) are modeled using simple collections (`List<Artwork>`) rather than separate junction classes.
 
 ## Student Tasks (The Challenge)
-1. **ID Discovery**: Students must "discover" or create IDs at the database level. Your JDBC DAOs will need to map database IDs (Primary Keys) to Java object references during the `findAll` or `save` operations.
+1. **ID Mapping**: Use the `id` field already present in Java models as the primary key mapping for JDBC (`findAll`, `save`, `update`, `delete`).
 2. **Relational Mapping**: You must implement the logic to reconstruct the object graph from relational tables. When fetching an `Artwork`, you must also fetch/link the corresponding `Artist`.
-3. **Database Setup**: Create the MySQL database and tables as per the technical requirements (including IDs and Foreign Keys that are NOT visible in the Java models).
+3. **Database Setup**: Create the MySQL database and tables with IDs and foreign keys that map to the model references.
 4. **JDBC Implementation**: Implement the `Jdbc` DAO classes in `com.project.artconnect.persistence`.
 5. **Service Swap**: Update `ServiceProvider` to use your new `Jdbc` DAOs.
+
+## Current API Compatibility Note
+- Some service methods still expose legacy natural-key lookups (for example `getArtistByName` or `getArtworkByTitle`) to keep the current UI flow unchanged.
+- For JDBC and database operations, prefer ID-based updates/deletes (`WHERE id = ?`) even when legacy lookup methods are still present.
 
 ## Architecture Diagram
 ```mermaid

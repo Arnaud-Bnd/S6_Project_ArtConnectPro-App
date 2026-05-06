@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
+        System.out.println("Starting ArtConnect Pro...");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/project/artconnect/ui/MainView.fxml"));
         Scene scene = new Scene(loader.load(), 1200, 800);
         stage.setTitle("ArtConnect Pro - Local Art Community Platform");

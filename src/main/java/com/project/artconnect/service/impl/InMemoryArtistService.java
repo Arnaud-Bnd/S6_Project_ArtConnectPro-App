@@ -40,7 +40,7 @@ public class InMemoryArtistService implements ArtistService {
     }
 
     private void addArtist(String name, String bio, int year, String email, String city, String... disciplineNames) {
-        Artist a = new Artist(name, bio, year, email, city);
+        Artist a = new Artist(null, name, bio, year, email, city);
         for (String dName : disciplineNames) {
             if (disciplines.containsKey(dName)) {
                 a.getDisciplines().add(disciplines.get(dName));

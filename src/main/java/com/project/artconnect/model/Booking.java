@@ -3,6 +3,7 @@ package com.project.artconnect.model;
 import java.time.LocalDateTime;
 
 public class Booking {
+    private Integer id;
     private Workshop workshop;
     private CommunityMember member;
     private LocalDateTime bookingDate;
@@ -17,6 +18,10 @@ public class Booking {
         this.bookingDate = LocalDateTime.now();
         this.paymentStatus = "PENDING";
     }
+
+    public Integer getId() { return id; }
+
+    public void setId(Integer id) {this.id = id;}
 
     public Workshop getWorkshop() {
         return workshop;

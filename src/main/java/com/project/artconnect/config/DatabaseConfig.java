@@ -1,11 +1,27 @@
 package com.project.artconnect.config;
 
-/**
- * Database configuration constants.
- * TODO: Students should update these with their own MySQL credentials.
- */
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 public class DatabaseConfig {
-    public static final String URL = "jdbc:mysql://localhost:3306/artconnect_db";
-    public static final String USER = "root";
-    public static final String PASSWORD = "1234"; // CHANGE ME
+
+    private static final Properties props = new Properties();
+
+    static {
+        try (InputStream in = DatabaseConfig.class
+                .getClassLoader()
+                .getResourceAsStream("db.properties")) {
+            if (in != null) {
+                props.load(in);
+            }
+        } catch (IOException e) {
+            throw new ExceptionInInitializerError("Impossible de charger db.properties : " + e.getMessage());
+        }
+    }
+
+    public static final String URL = props.getProperty("db.url","jdbc:mysql://localhost:3306/artconnect_db");
+    public static final String USER = props.getProperty("db.user", "root");
+    public static final String PASSWORD = props.getProperty("db.password", "1234");
+    public static final String DRIVER = props.getProperty("db.driver", "com.mysql.cj.jdbc.Driver");
 }

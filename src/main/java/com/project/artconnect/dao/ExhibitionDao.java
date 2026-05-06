@@ -1,6 +1,8 @@
 package com.project.artconnect.dao;
 
 import com.project.artconnect.model.Exhibition;
+
+import java.sql.SQLException;
 import java.util.List;
 
 public interface ExhibitionDao {
@@ -10,5 +12,5 @@ public interface ExhibitionDao {
 
     void update(Exhibition exhibition);
 
-    void delete(String title);
+    void delete(int exhibition_id);
 }

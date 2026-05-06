@@ -1,6 +1,7 @@
 package com.project.artconnect.model;
 
 public class ArtworkTag {
+    private Integer id;
     private String name;
 
     public ArtworkTag() {
@@ -9,6 +10,10 @@ public class ArtworkTag {
     public ArtworkTag(String name) {
         this.name = name;
     }
+
+    public Integer getId() { return id; }
+
+    public void setId(Integer id) {this.id = id;}
 
     public String getName() {
         return name;

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Exhibition {
+    private Integer id;
     private String title;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -23,6 +24,10 @@ public class Exhibition {
         this.endDate = endDate;
         this.gallery = gallery;
     }
+
+    public Integer getId() { return id; }
+
+    public void setId(Integer id) {this.id = id;}
 
     public String getTitle() {
         return title;
@@ -44,9 +49,7 @@ public class Exhibition {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
+   public void setEndDate(LocalDate endDate) {this.endDate = endDate;}
 
     public String getDescription() {
         return description;

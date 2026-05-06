@@ -1,26 +1,37 @@
 package com.project.artconnect.util;
 
+import com.project.artconnect.dao.*;
+
+import com.project.artconnect.persistence.*;
+
 import com.project.artconnect.service.*;
 import com.project.artconnect.service.impl.*;
+
 
 /**
  * Service Provider to manage singleton instances of services and handle their
  * initialization.
  */
 public class ServiceProvider {
-    private static final InMemoryArtistService artistService = new InMemoryArtistService();
-    private static final InMemoryArtworkService artworkService = new InMemoryArtworkService();
-    private static final InMemoryGalleryService galleryService = new InMemoryGalleryService();
-    private static final InMemoryWorkshopService workshopService = new InMemoryWorkshopService();
-    private static final InMemoryCommunityService communityService = new InMemoryCommunityService();
+    private static final ArtistDao artistDao = new JdbcArtistDao();
+    private static final ArtworkDao artworkDao = new JdbcArtworkDao();
+    private static final CommunityMemberDao communityMemberDao = new JdbcCommunityMemberDao();
+    private static final GalleryDao galleryDao = new JdbcGalleryDao();
+    private static final WorkshopDao workshopDao = new JdbcWorkshopDao();
 
-    static {
-        // Initialize services with their dependencies
-        artworkService.initData(artistService);
-        galleryService.initData(artworkService);
-        workshopService.initData(artistService);
-        communityService.initData(artworkService);
-    }
+    private static final JdbcArtistService artistService = new JdbcArtistService(artistDao);
+    private static final JdbcArtworkService artworkService = new JdbcArtworkService(artworkDao);
+    private static final JdbcGalleryService galleryService = new JdbcGalleryService(galleryDao);
+    private static final JdbcWorkshopService workshopService = new JdbcWorkshopService(workshopDao);
+    private static final JdbcCommunityService communityService = new JdbcCommunityService(communityMemberDao);
+
+//    static {
+//        // Initialize services with their dependencies
+//        artworkService.initData(artistService);
+//        galleryService.initData(artworkService);
+//        workshopService.initData(artistService);
+//        communityService.initData(artworkService);
+//    }
 
     public static ArtistService getArtistService() {
         return artistService;

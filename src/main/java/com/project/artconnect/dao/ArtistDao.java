@@ -1,6 +1,7 @@
 package com.project.artconnect.dao;
 
 import com.project.artconnect.model.Artist;
+
 import java.util.List;
 
 /**
@@ -13,7 +14,9 @@ public interface ArtistDao {
 
     void update(Artist artist);
 
-    void delete(String artistName);
+    void delete(int artist_id);
 
     List<Artist> findByCity(String city);
+
+    Artist findById(int artist_id);
 }
