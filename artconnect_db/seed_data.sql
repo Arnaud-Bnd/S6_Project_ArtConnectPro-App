@@ -73,7 +73,7 @@ INSERT INTO Artwork_Tags (name) VALUES
 ('Onirisme'),
 ('Minimalisme');
 
-INSERT INTO Community_members (name, email, birth_year, city, membership_type, phone) VALUES
+INSERT INTO Community_Members (name, email, birth_year, city, membership_type, phone) VALUES
 ('Alice Martin', 'alice.martin@gmail.com', 1988, 'Paris', 'Premium', '0611111111'),
 ('Bruno Lefevre', 'bruno.lefevre@hotmail.fr', 1975, 'Lyon', 'Standard', '0622222222'),
 ('Camille Bertrand', 'camille.bertrand@yahoo.fr', 1995, 'Bordeaux', 'Premium', '0633333333'),

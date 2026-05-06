@@ -24,7 +24,7 @@ BEGIN
         SET MESSAGE_TEXT = 'Workshop inexistant ou capacité non définie';
     END IF;
 
-    IF current_bookings >= workshop_capacity THEN 
+    IF (current_bookings + 1) > workshop_capacity THEN 
         SIGNAL SQLSTATE '45000' 
         SET MESSAGE_TEXT = 'Réservation impossible : workshop complet';
     END IF;

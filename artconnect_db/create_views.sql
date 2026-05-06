@@ -69,7 +69,7 @@ SELECT member_id,
        birth_year,
        city,
        membership_type
-FROM Community_members;
+FROM Community_Members;
 
 CREATE OR REPLACE VIEW v_bookings_dashboard AS
 SELECT b.booking_id,
@@ -85,7 +85,7 @@ SELECT b.booking_id,
        w.level AS workshop_level,
        w.location AS workshop_location
 FROM Bookings b
-JOIN Community_members m ON b.member_id = m.member_id
+JOIN Community_Members m ON b.member_id = m.member_id
 JOIN Workshops w ON b.workshop_id = w.workshop_id;
 
 CREATE OR REPLACE VIEW v_artwork_tags AS
