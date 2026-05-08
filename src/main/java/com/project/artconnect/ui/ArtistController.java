@@ -25,6 +25,15 @@ public class ArtistController {
     @FXML
     private TableColumn<Artist, Integer> yearColumn;
 
+    @FXML
+    private TextField nameField;
+    @FXML
+    private TextField cityField;
+    @FXML
+    private TextField emailField;
+    @FXML
+    private TextField birthYearField;
+
     private final ArtistService artistService = ServiceProvider.getArtistService();
 
     @FXML
@@ -34,8 +43,21 @@ public class ArtistController {
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("contactEmail"));
         yearColumn.setCellValueFactory(new PropertyValueFactory<>("birthYear"));
 
-        disciplineFilter.setItems(FXCollections.observableArrayList(artistService.getAllDisciplines()));
-        refreshTable();
+        try {
+            disciplineFilter.setItems(FXCollections.observableArrayList(artistService.getAllDisciplines()));
+            refreshTable();
+        } catch (Exception e) {
+            showError("Erreur lors du chargement des artistes : " + e.getMessage());
+        }
+
+        artistTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, selectedArtist) -> {
+            if (selectedArtist != null) {
+                nameField.setText(selectedArtist.getName());
+                cityField.setText(selectedArtist.getCity());
+                emailField.setText(selectedArtist.getContactEmail());
+                birthYearField.setText(String.valueOf(selectedArtist.getBirthYear()));
+            }
+        });
     }
 
     @FXML
@@ -53,7 +75,90 @@ public class ArtistController {
         refreshTable();
     }
 
+    @FXML
+    private void handleAdd() {
+        try {
+            Artist artist = new Artist();
+
+            artist.setName(nameField.getText());
+            artist.setCity(cityField.getText());
+            artist.setContactEmail(emailField.getText());
+            artist.setBirthYear(Integer.parseInt(birthYearField.getText()));
+
+            artistService.createArtist(artist);
+
+            refreshTable();
+            clearForm();
+        } catch (Exception e) {
+            showError("Erreur lors de l'ajout de l'artiste: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void handleUpdate() {
+        Artist selectedArtist = artistTable.getSelectionModel().getSelectedItem();
+
+        if (selectedArtist == null) {
+            showAlert("Sélectionnez un artiste à mettre à jour.");
+            return;
+        }
+
+        try {
+            selectedArtist.setName(nameField.getText());
+            selectedArtist.setCity(cityField.getText());
+            selectedArtist.setContactEmail(emailField.getText());
+            selectedArtist.setBirthYear(Integer.parseInt(birthYearField.getText()));
+
+            artistService.updateArtist(selectedArtist);
+
+            refreshTable();
+            clearForm();
+        } catch (Exception e) {
+            showError("Erreur lors de la mise à jour de l'artiste: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void handleDelete() {
+        Artist selectedArtist = artistTable.getSelectionModel().getSelectedItem();
+
+        if (selectedArtist == null) {
+            showAlert("Sélectionnez un artiste à supprimer.");
+            return;
+        }
+
+        try {
+            artistService.deleteArtist(selectedArtist.getName());
+            refreshTable();
+            clearForm();
+        } catch (Exception e) {
+            showError("Erreur lors de la suppression de l'artiste: " + e.getMessage());
+        }
+    }
+
     private void refreshTable() {
         artistTable.setItems(FXCollections.observableArrayList(artistService.getAllArtists()));
+    }
+
+    private void clearForm() {
+        nameField.clear();
+        cityField.clear();
+        emailField.clear();
+        birthYearField.clear();
+    }
+
+    private void showError(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("ERROR —");
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Warning —");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
