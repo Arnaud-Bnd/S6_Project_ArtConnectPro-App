@@ -38,8 +38,6 @@ public class JdbcWorkshopService implements WorkshopService {
 
         Booking booking = new Booking(workshop, member);
         member.addBooking(booking);
-
-        // ⚠️ pas encore de persistence booking en DB
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.project.artconnect.ui;
 
+import com.project.artconnect.dao.ExhibitionDao;
 import com.project.artconnect.model.Exhibition;
 import com.project.artconnect.model.Gallery;
 import com.project.artconnect.service.GalleryService;
@@ -26,6 +27,8 @@ public class ExhibitionController {
     @FXML
     private TableColumn<Exhibition, String> galleryColumn;
 
+    private final ExhibitionDao exhibitionDao = ServiceProvider.getExhibitionDao();
+
     private final GalleryService galleryService = ServiceProvider.getGalleryService();
 
     @FXML
@@ -41,10 +44,7 @@ public class ExhibitionController {
     }
 
     private void refreshData() {
-        List<Exhibition> all = new ArrayList<>();
-        for (Gallery g : galleryService.getAllGalleries()) {
-            all.addAll(g.getExhibitions());
-        }
+        List<Exhibition> all = exhibitionDao.findAll();
         exhibitionTable.setItems(FXCollections.observableArrayList(all));
     }
 }

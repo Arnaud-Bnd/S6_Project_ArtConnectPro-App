@@ -35,7 +35,6 @@ public class JdbcGalleryService implements GalleryService {
             return List.of();
         }
 
-        // ⚠️ actuellement exhibitions ne sont pas en DB
         return gallery.getExhibitions();
     }
 }

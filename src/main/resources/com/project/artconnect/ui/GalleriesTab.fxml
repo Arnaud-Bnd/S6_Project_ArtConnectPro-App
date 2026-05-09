@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
 
 <VBox spacing="10.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.artconnect.ui.GalleryController">
+
     <padding>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        <Insets top="10.0" right="10.0" bottom="10.0" left="10.0"/>
     </padding>
-    <ListView fx:id="galleryList" VBox.vgrow="ALWAYS" />
+
+    <!-- Search -->
+    <HBox spacing="10.0">
+        <TextField fx:id="searchField" promptText="Search galleries..." HBox.hgrow="ALWAYS"/>
+        <Button text="Search" onAction="#handleSearch"/>
+        <Button text="Reset" onAction="#handleReset"/>
+    </HBox>
+
+    <!-- Liste galleries -->
+    <Label text="Galleries"/>
+    <ListView fx:id="galleryList" prefHeight="250"/>
+
+    <!-- Détails -->
+    <Label text="Gallery Details"/>
+    <Label fx:id="galleryDetailsLabel" wrapText="true"/>
+
+    <!-- Exhibitions -->
+    <Label text="Exhibitions"/>
+    <ListView fx:id="exhibitionList" prefHeight="150"/>
 </VBox>

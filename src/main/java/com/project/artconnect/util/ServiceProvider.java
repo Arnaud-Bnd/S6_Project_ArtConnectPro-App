@@ -16,14 +16,15 @@ public class ServiceProvider {
     private static final ArtistDao artistDao = new JdbcArtistDao();
     private static final ArtworkDao artworkDao = new JdbcArtworkDao();
     private static final CommunityMemberDao communityMemberDao = new JdbcCommunityMemberDao();
+    private static final ExhibitionDao exhibitionDao = new JdbcExhibitionDao();
     private static final GalleryDao galleryDao = new JdbcGalleryDao();
     private static final WorkshopDao workshopDao = new JdbcWorkshopDao();
 
     private static final JdbcArtistService artistService = new JdbcArtistService(artistDao);
     private static final JdbcArtworkService artworkService = new JdbcArtworkService(artworkDao);
-    private static final JdbcGalleryService galleryService = new JdbcGalleryService(galleryDao);
-    private static final JdbcWorkshopService workshopService = new JdbcWorkshopService(workshopDao);
     private static final JdbcCommunityService communityService = new JdbcCommunityService(communityMemberDao);
+    private static final JdbcWorkshopService workshopService = new JdbcWorkshopService(workshopDao);
+    private static final JdbcGalleryService galleryService = new JdbcGalleryService(galleryDao);
 
 //    static {
 //        // Initialize services with their dependencies
@@ -41,15 +42,17 @@ public class ServiceProvider {
         return artworkService;
     }
 
+    public static CommunityService getCommunityService() {
+        return communityService;
+    }
+
+    public static ExhibitionDao getExhibitionDao() {return exhibitionDao;}
+
     public static GalleryService getGalleryService() {
         return galleryService;
     }
 
     public static WorkshopService getWorkshopService() {
         return workshopService;
-    }
-
-    public static CommunityService getCommunityService() {
-        return communityService;
     }
 }

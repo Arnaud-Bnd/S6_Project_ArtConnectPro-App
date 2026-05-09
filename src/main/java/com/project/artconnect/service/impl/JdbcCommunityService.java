@@ -34,6 +34,6 @@ public class JdbcCommunityService implements CommunityService {
         if (member == null) {
             return List.of();
         }
-        return member.getReviews(); // ⚠️ si reviews pas en DB encore
+        return member.getReviews();
     }
 }
