@@ -5,7 +5,6 @@ DELIMITER //
 CREATE FUNCTION fn_booking_count(p_workshop_id INT)
 RETURNS INT
 DETERMINISTIC
-READS SQL DATA
 BEGIN
     DECLARE v_count INT;
 

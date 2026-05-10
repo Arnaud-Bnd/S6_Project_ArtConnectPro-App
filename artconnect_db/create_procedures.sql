@@ -11,36 +11,53 @@ CREATE PROCEDURE sp_create_booking(
 BEGIN
     DECLARE v_exists INT;
 
+    -- Vérifie le membre
     SELECT COUNT(*)
     INTO v_exists
-    FROM Community_Members
+    FROM Community_members
     WHERE member_id = p_member_id;
 
-    IF v_exists = 0 THEN 
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Membre inexistant';
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Membre inexistant';
     END IF;
 
+    -- Vérifie le workshop
     SELECT COUNT(*)
     INTO v_exists
     FROM Workshops
     WHERE workshop_id = p_workshop_id;
 
-    IF v_exists = 0 THEN 
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Workshop inexistant';
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Workshop inexistant';
     END IF;
 
+    -- Vérifie si déjà inscrit
     SELECT COUNT(*)
     INTO v_exists
     FROM Bookings
-    WHERE workshop_id = p_workshop_id 
+    WHERE workshop_id = p_workshop_id
       AND member_id = p_member_id;
 
-    IF v_exists > 0 THEN 
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Ce membre est déjà inscrit à ce workshop';
+    IF v_exists > 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Ce membre est déjà inscrit à ce workshop';
     END IF;
 
-    INSERT INTO Bookings(booking_date, payment_status, workshop_id, member_id)
-    VALUES (p_booking_date, p_payment_status, p_workshop_id, p_member_id);
+    -- Insertion réservation
+    INSERT INTO Bookings (
+        booking_date,
+        payment_status,
+        workshop_id,
+        member_id
+    )
+    VALUES (
+        p_booking_date,
+        p_payment_status,
+        p_workshop_id,
+        p_member_id
+    );
 END //
 
 CREATE PROCEDURE sp_assign_artist_to_workshop(
@@ -48,28 +65,35 @@ CREATE PROCEDURE sp_assign_artist_to_workshop(
     IN p_workshop_id INT
 )
 BEGIN
-    DECLARE v_artist_exists INT;
-    DECLARE v_workshop_exists INT;
+    DECLARE v_exists INT;
 
-    SELECT COUNT(*) INTO v_artist_exists
+    -- Vérifie artiste
+    SELECT COUNT(*)
+    INTO v_exists
     FROM Artists
     WHERE artist_id = p_artist_id;
 
-    IF v_artist_exists = 0 THEN 
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Artiste inexistant';
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Artiste inexistant';
     END IF;
 
-    SELECT COUNT(*) INTO v_workshop_exists
+    -- Vérifie workshop
+    SELECT COUNT(*)
+    INTO v_exists
     FROM Workshops
     WHERE workshop_id = p_workshop_id;
 
-    IF v_workshop_exists = 0 THEN 
-        SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Workshop inexistant';
+    IF v_exists = 0 THEN
+        SIGNAL SQLSTATE '45000'
+        SET MESSAGE_TEXT = 'Workshop inexistant';
     END IF;
 
+    -- Assigne l'artiste comme instructeur
     UPDATE Workshops
     SET instructor_id = p_artist_id
     WHERE workshop_id = p_workshop_id;
+
 END //
 
 DELIMITER ;

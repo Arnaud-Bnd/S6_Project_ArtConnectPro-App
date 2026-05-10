@@ -47,7 +47,9 @@ public class ArtworkController {
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        statusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        statusColumn.setCellValueFactory(cellData -> new SimpleStringProperty(
+                cellData.getValue().getStatus() != null ? cellData.getValue().getStatus().name() : ""));
 
         artistColumn.setCellValueFactory(cellData -> new SimpleStringProperty(
                 cellData.getValue().getArtist() != null ? cellData.getValue().getArtist().getName() : "Unknown"));
@@ -186,14 +188,14 @@ public class ArtworkController {
 
     private void showError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText("ERROR —");
+        alert.setHeaderText("ERROR");
         alert.setContentText(message);
         alert.showAndWait();
     }
 
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Warning —");
+        alert.setTitle("Warning");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();

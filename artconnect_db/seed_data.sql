@@ -13,24 +13,24 @@ INSERT INTO Artists (name, city, contact_email, phone, birth_year, bio, website,
 ('Pierre Guillot', 'Rennes', 'pierre.guillot@craft.fr', '0601234567', 1970, 'Maître verrier et artiste plasticien. Plus de 30 ans d\'expérience dans la création de vitraux contemporains.', 'https://pierreguillot.fr', '@pierre_verre', FALSE);
 
 INSERT INTO Artworks (title, creation_year, medium, type, description, dimensions, price, status, artist_id) VALUES
-('Lumières de la Ville', 2021, 'Huile sur toile', 'Peinture', 'Portrait nocturne d\'une rue parisienne sous la pluie, jeu de reflets et de lumières artificielles.', '100x80 cm', 3500.00, TRUE, 1),
-('Fragments Urbains', 2020, 'Huile sur toile', 'Peinture', 'Série de visages fragmentés évoquant la solitude dans la foule.', '120x90 cm', 4200.00, TRUE, 1),
-('L\'Éveil', 2019, 'Bronze', 'Sculpture', 'Figure humaine en mouvement, symbolisant l\'éveil de la conscience.', '60x30x25 cm', 8500.00, FALSE, 2),
-('Méandres', 2022, 'Béton et acier', 'Sculpture', 'Installation abstraite explorant les flux et tensions urbaines.', '200x50x50 cm', 15000.00, TRUE, 2),
-('Racines', 2021, 'Photographie numérique', 'Photographie', 'Série de portraits de femmes issues de la diaspora africaine.', '80x60 cm', 1200.00, TRUE, 3),
-('Babel Moderne', 2022, 'Photographie argentique', 'Photographie', 'Dyptique représentant des marchés populaires à Marseille et Alger.', '100x70 cm', 2100.00, TRUE, 3),
-('Vibrations #3', 2020, 'Acrylique sur toile', 'Peinture', 'Composition abstraite chromatique et rythmique.', '150x150 cm', 5600.00, FALSE, 4),
-('Sans Titre XII', 2023, 'Technique mixte', 'Peinture', 'Œuvre expérimentale mêlant collage et peinture.', '90x70 cm', 3100.00, TRUE, 4),
-('Jardins Secrets', 2022, 'Aquarelle', 'Illustration', 'Série de 5 illustrations botaniques imaginaires.', '42x30 cm', 850.00, TRUE, 5),
-('Contes d\'Été', 2023, 'Encre et aquarelle', 'Illustration', 'Illustration narrative pour album jeunesse.', '50x35 cm', 1100.00, TRUE, 5),
-('Bol Céladon n°7', 2021, 'Grès émaillé', 'Céramique', 'Bol tourné à la main, cuisson réduction.', '12x20 cm', 320.00, FALSE, 6),
-('Vase Flamme', 2022, 'Porcelaine', 'Céramique', 'Vase en porcelaine aux formes organiques.', '35x15 cm', 780.00, TRUE, 6),
-('Mémoire Gravée', 2018, 'Eau-forte', 'Gravure', 'Série de 12 estampes sur la mémoire.', '40x30 cm', 2400.00, TRUE, 7),
-('Boucle', 2023, 'Vidéo installation', 'Numérique', 'Installation vidéo en boucle.', '4K, 12 min', 6000.00, TRUE, 8),
-('Miroirs Brisés', 2022, 'Technique mixte numérique', 'Numérique', 'Installation interactive fragmentant le reflet.', 'Variable', 9500.00, FALSE, 8),
-('Songe d\'Icare', 2023, 'Huile sur toile', 'Peinture', 'Composition surréaliste contemporaine.', '180x140 cm', 7200.00, TRUE, 9),
-('Animus', 2021, 'Acrylique sur bois', 'Peinture', 'Portraits oniriques hybrides.', '60x60 cm', 2800.00, TRUE, 9),
-('Rose Cathédrale', 2015, 'Vitrail', 'Vitrail', 'Vitrail contemporain inspiré des rosaces gothiques.', '80x80 cm', 12000.00, TRUE, 10);
+('Lumières de la Ville', 2021, 'Huile sur toile', 'Peinture', 'Portrait nocturne d''une rue parisienne sous la pluie, jeu de reflets et de lumières artificielles.', '100x80 cm', 3500.00, 'FOR_SALE', 1),
+('Fragments Urbains', 2020, 'Huile sur toile', 'Peinture', 'Série de visages fragmentés évoquant la solitude dans la foule.', '120x90 cm', 4200.00, 'FOR_SALE', 1),
+('L''Éveil', 2019, 'Bronze', 'Sculpture', 'Figure humaine en mouvement, symbolisant l''éveil de la conscience.', '60x30x25 cm', 8500.00, 'SOLD', 2),
+('Méandres', 2022, 'Béton et acier', 'Sculpture', 'Installation abstraite explorant les flux et tensions urbaines.', '200x50x50 cm', 15000.00, 'FOR_SALE', 2),
+('Racines', 2021, 'Photographie numérique', 'Photographie', 'Série de portraits de femmes issues de la diaspora africaine.', '80x60 cm', 1200.00, 'FOR_SALE', 3),
+('Babel Moderne', 2022, 'Photographie argentique', 'Photographie', 'Dyptique représentant des marchés populaires à Marseille et Alger.', '100x70 cm', 2100.00, 'FOR_SALE', 3),
+('Vibrations #3', 2020, 'Acrylique sur toile', 'Peinture', 'Composition abstraite chromatique et rythmique.', '150x150 cm', 5600.00, 'SOLD', 4),
+('Sans Titre XII', 2023, 'Technique mixte', 'Peinture', 'Œuvre expérimentale mêlant collage et peinture.', '90x70 cm', 3100.00, 'FOR_SALE', 4),
+('Jardins Secrets', 2022, 'Aquarelle', 'Illustration', 'Série de 5 illustrations botaniques imaginaires.', '42x30 cm', 850.00, 'FOR_SALE', 5),
+('Contes d''Été', 2023, 'Encre et aquarelle', 'Illustration', 'Illustration narrative pour album jeunesse.', '50x35 cm', 1100.00, 'FOR_SALE', 5),
+('Bol Céladon n°7', 2021, 'Grès émaillé', 'Céramique', 'Bol tourné à la main, cuisson réduction.', '12x20 cm', 320.00, 'SOLD', 6),
+('Vase Flamme', 2022, 'Porcelaine', 'Céramique', 'Vase en porcelaine aux formes organiques.', '35x15 cm', 780.00, 'FOR_SALE', 6),
+('Mémoire Gravée', 2018, 'Eau-forte', 'Gravure', 'Série de 12 estampes sur la mémoire.', '40x30 cm', 2400.00, 'FOR_SALE', 7),
+('Boucle', 2023, 'Vidéo installation', 'Numérique', 'Installation vidéo en boucle.', '4K, 12 min', 6000.00, 'FOR_SALE', 8),
+('Miroirs Brisés', 2022, 'Technique mixte numérique', 'Numérique', 'Installation interactive fragmentant le reflet.', 'Variable', 9500.00, 'SOLD', 8),
+('Songe d''Icare', 2023, 'Huile sur toile', 'Peinture', 'Composition surréaliste contemporaine.', '180x140 cm', 7200.00, 'FOR_SALE', 9),
+('Animus', 2021, 'Acrylique sur bois', 'Peinture', 'Portraits oniriques hybrides.', '60x60 cm', 2800.00, 'FOR_SALE', 9), 
+('Rose Cathédrale', 2015, 'Vitrail', 'Vitrail', 'Vitrail contemporain inspiré des rosaces gothiques.', '80x80 cm', 12000.00, 'FOR_SALE', 10);
 
 INSERT INTO Workshops (title, date_, price, level, duration_minutes, max_participants, location, description, instructor_id) VALUES
 ('Introduction à la peinture à l\'huile', '2025-02-10 10:00:00', 75.00, 'Débutant', 180, 12, 'Atelier Sophie Marceau - Paris', 'Bases de la peinture à l\'huile.', 1),
@@ -73,7 +73,7 @@ INSERT INTO Artwork_Tags (name) VALUES
 ('Onirisme'),
 ('Minimalisme');
 
-INSERT INTO Community_Members (name, email, birth_year, city, membership_type, phone) VALUES
+INSERT INTO Community_members (name, email, birth_year, city, membership_type, phone) VALUES
 ('Alice Martin', 'alice.martin@gmail.com', 1988, 'Paris', 'Premium', '0611111111'),
 ('Bruno Lefevre', 'bruno.lefevre@hotmail.fr', 1975, 'Lyon', 'Standard', '0622222222'),
 ('Camille Bertrand', 'camille.bertrand@yahoo.fr', 1995, 'Bordeaux', 'Premium', '0633333333'),

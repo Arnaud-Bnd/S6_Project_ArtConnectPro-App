@@ -165,8 +165,8 @@ public class ArtworkDaoImpl implements ArtworkDao {
         a.setDescription(rs.getString("description"));
         a.setPrice(rs.getDouble("price"));
 
-        boolean status = rs.getBoolean("status");
-        a.setStatus(status ? Artwork.Status.FOR_SALE : Artwork.Status.SOLD);
+        String status = rs.getString("status");
+        a.setStatus(Artwork.Status.valueOf(status));
 
         int artistId = rs.getInt("artist_id");
         if (!rs.wasNull()) {
@@ -193,9 +193,7 @@ public class ArtworkDaoImpl implements ArtworkDao {
         ps.setString(5, artwork.getDimensions());
         ps.setString(6, artwork.getDescription());
         ps.setDouble(7, artwork.getPrice());
-
-        boolean status = artwork.getStatus() == Artwork.Status.FOR_SALE;
-        ps.setBoolean(8, status);
+        ps.setString(8, artwork.getStatus().name());
 
         if (artwork.getArtist() != null && artwork.getArtist().getId() != null) {
             ps.setInt(9, artwork.getArtist().getId());

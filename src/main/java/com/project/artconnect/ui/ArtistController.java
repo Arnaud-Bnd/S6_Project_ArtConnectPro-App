@@ -13,8 +13,6 @@ public class ArtistController {
     @FXML
     private TextField searchField;
     @FXML
-    private ComboBox<Discipline> disciplineFilter;
-    @FXML
     private TableView<Artist> artistTable;
     @FXML
     private TableColumn<Artist, String> nameColumn;
@@ -44,7 +42,6 @@ public class ArtistController {
         yearColumn.setCellValueFactory(new PropertyValueFactory<>("birthYear"));
 
         try {
-            disciplineFilter.setItems(FXCollections.observableArrayList(artistService.getAllDisciplines()));
             refreshTable();
         } catch (Exception e) {
             showError("Erreur lors du chargement des artistes : " + e.getMessage());
@@ -63,15 +60,16 @@ public class ArtistController {
     @FXML
     private void handleSearch() {
         String query = searchField.getText();
-        Discipline d = disciplineFilter.getValue();
-        String dName = (d != null) ? d.getName() : null;
-        artistTable.setItems(FXCollections.observableArrayList(artistService.searchArtists(query, dName, null)));
+        artistTable.setItems(
+            FXCollections.observableArrayList(
+                artistService.searchArtists(query, null, null)
+            )
+        );
     }
 
     @FXML
     private void handleReset() {
         searchField.clear();
-        disciplineFilter.setValue(null);
         refreshTable();
     }
 
@@ -149,14 +147,14 @@ public class ArtistController {
 
     private void showError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText("ERROR —");
+        alert.setHeaderText("ERROR");
         alert.setContentText(message);
         alert.showAndWait();
     }
 
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Warning —");
+        alert.setTitle("Warning");
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();

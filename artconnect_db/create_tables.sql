@@ -24,9 +24,13 @@ CREATE TABLE IF NOT EXISTS Artworks (
     description TEXT,
     dimensions VARCHAR(50),
     price DECIMAL(10,2),
-    status BOOLEAN,
+
+    status ENUM('FOR_SALE', 'SOLD', 'EXHIBITED') NOT NULL,
+
     artist_id INT,
-    CONSTRAINT fk_artwork_artist FOREIGN KEY (artist_id) REFERENCES Artists(artist_id)
+    CONSTRAINT fk_artwork_artist 
+        FOREIGN KEY (artist_id) 
+        REFERENCES Artists(artist_id)
 );
 
 CREATE TABLE IF NOT EXISTS Workshops (
