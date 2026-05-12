@@ -12,6 +12,7 @@
     <!-- Search bar -->
     <HBox spacing="10.0" alignment="CENTER_LEFT">
         <TextField fx:id="searchField" promptText="Search artists..." HBox.hgrow="ALWAYS" />
+        <ComboBox fx:id="disciplineFilter" promptText="Filter by Discipline" />
         <Button text="Search" onAction="#handleSearch" />
         <Button text="Reset" onAction="#handleReset" />
     </HBox>
@@ -29,6 +30,27 @@
 
         <Label text="Birth Year:" GridPane.rowIndex="1" GridPane.columnIndex="2" />
         <TextField fx:id="birthYearField" GridPane.rowIndex="1" GridPane.columnIndex="3" />
+
+        <Label text="Phone:" GridPane.rowIndex="2" GridPane.columnIndex="0" />
+        <TextField fx:id="phoneField" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+
+        <Label text="Website:" GridPane.rowIndex="2" GridPane.columnIndex="2" />
+        <TextField fx:id="websiteField" GridPane.rowIndex="2" GridPane.columnIndex="3" />
+
+        <Label text="Social Media:" GridPane.rowIndex="3" GridPane.columnIndex="0" />
+        <TextField fx:id="socialMediaField" GridPane.rowIndex="3" GridPane.columnIndex="1" />
+
+        <Label text="Active:" GridPane.rowIndex="3" GridPane.columnIndex="2" />
+        <CheckBox fx:id="activeCheckBox" GridPane.rowIndex="3" GridPane.columnIndex="3" />
+
+        <Label text="Bio:" GridPane.rowIndex="4" GridPane.columnIndex="0" />
+        <TextArea fx:id="bioField" prefRowCount="3" GridPane.rowIndex="4" GridPane.columnIndex="1" GridPane.columnSpan="3" />
+
+        <Label text="Disciplines:" GridPane.rowIndex="5" GridPane.columnIndex="0" />
+        <ComboBox fx:id="disciplineCombo" GridPane.rowIndex="5" GridPane.columnIndex="1" />
+
+        <Label text="Artworks:" GridPane.rowIndex="5" GridPane.columnIndex="2" />
+        <TextField fx:id="artworksField" editable="false" GridPane.rowIndex="5" GridPane.columnIndex="3" />
     </GridPane>
 
     <!-- Crud button -->
@@ -45,6 +67,9 @@
             <TableColumn fx:id="cityColumn" text="City" prefWidth="150" />
             <TableColumn fx:id="emailColumn" text="Email" prefWidth="200" />
             <TableColumn fx:id="yearColumn" text="Birth Year" prefWidth="100" />
+            <TableColumn fx:id="phoneColumn" text="Phone" prefWidth="120" />
+            <TableColumn fx:id="websiteColumn" text="Website" prefWidth="180" />
+            <TableColumn fx:id="activeColumn" text="Active" prefWidth="80" />
         </columns>
     </TableView>
 </VBox>

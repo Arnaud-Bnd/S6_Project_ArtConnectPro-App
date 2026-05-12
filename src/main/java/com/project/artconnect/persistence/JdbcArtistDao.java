@@ -7,7 +7,6 @@ import com.project.artconnect.util.ConnectionManager;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class JdbcArtistDao implements ArtistDao {
 
@@ -40,7 +39,6 @@ public class JdbcArtistDao implements ArtistDao {
         DELETE FROM artists
         WHERE artist_id = ?
     """;
-
 
     @Override
     public List<Artist> findAll() {
@@ -145,6 +143,7 @@ public class JdbcArtistDao implements ArtistDao {
 
     @Override
     public void delete(int artist_id) {
+
         try (Connection con = ConnectionManager.getConnection();
              PreparedStatement ps = con.prepareStatement(DELETE)) {
 
@@ -153,14 +152,15 @@ public class JdbcArtistDao implements ArtistDao {
             int affected = ps.executeUpdate();
 
             if (affected == 0) {
-                throw new IllegalStateException("Aucun artiste trouvé pour id : " + artist_id);
+                throw new IllegalStateException(
+                        "Aucun artiste trouvé pour id : " + artist_id);
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Erreur DAO JDBC Artist - ", e);
+            throw new RuntimeException(
+                    "Erreur suppression artiste : " + e.getMessage(), e);
         }
     }
-
 
     private Artist mapRow(ResultSet rs) throws SQLException {
         Artist a = new Artist();

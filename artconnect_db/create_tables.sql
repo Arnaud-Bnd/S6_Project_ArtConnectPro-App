@@ -28,9 +28,11 @@ CREATE TABLE IF NOT EXISTS Artworks (
     status ENUM('FOR_SALE', 'SOLD', 'EXHIBITED') NOT NULL,
 
     artist_id INT,
-    CONSTRAINT fk_artwork_artist 
-        FOREIGN KEY (artist_id) 
+
+    CONSTRAINT fk_artwork_artist
+        FOREIGN KEY (artist_id)
         REFERENCES Artists(artist_id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Workshops (
@@ -44,12 +46,12 @@ CREATE TABLE IF NOT EXISTS Workshops (
     location VARCHAR(50),
     description TEXT,
 
-    -- 🔥 AJOUT IMPORTANT
     instructor_id INT,
 
     CONSTRAINT fk_workshop_artist
         FOREIGN KEY (instructor_id)
         REFERENCES Artists(artist_id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Galleries (
@@ -91,61 +93,123 @@ CREATE TABLE IF NOT EXISTS Exhibitions (
     curator_name VARCHAR(100),
     start_date DATE,
     theme VARCHAR(100),
+
     gallery_id INT,
-    CONSTRAINT fk_exhibition_gallery FOREIGN KEY (gallery_id) REFERENCES Galleries(gallery_id)
+
+    CONSTRAINT fk_exhibition_gallery
+        FOREIGN KEY (gallery_id)
+        REFERENCES Galleries(gallery_id)
 );
 
 CREATE TABLE IF NOT EXISTS Bookings (
     booking_id INT AUTO_INCREMENT PRIMARY KEY,
     booking_date DATE NOT NULL,
     payment_status VARCHAR(50),
+
     workshop_id INT,
     member_id INT,
+
     CONSTRAINT uq_booking UNIQUE(workshop_id, member_id),
-    CONSTRAINT fk_booking_workshop FOREIGN KEY (workshop_id) REFERENCES Workshops(workshop_id),
-    CONSTRAINT fk_booking_member FOREIGN KEY (member_id) REFERENCES Community_members(member_id)
+
+    CONSTRAINT fk_booking_workshop
+        FOREIGN KEY (workshop_id)
+        REFERENCES Workshops(workshop_id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_booking_member
+        FOREIGN KEY (member_id)
+        REFERENCES Community_members(member_id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Reviews (
     review_id INT AUTO_INCREMENT PRIMARY KEY,
+
     rating INT,
-    CONSTRAINT chk_review_rating CHECK (rating BETWEEN 1 AND 5),
+    CONSTRAINT chk_review_rating
+        CHECK (rating BETWEEN 1 AND 5),
+
     comment TEXT,
     review_date DATE,
+
     artwork_id INT,
     member_id INT,
-    CONSTRAINT fk_review_artwork FOREIGN KEY (artwork_id) REFERENCES Artworks(artwork_id),
-    CONSTRAINT fk_review_member FOREIGN KEY (member_id) REFERENCES Community_members(member_id)
+
+    CONSTRAINT fk_review_artwork
+        FOREIGN KEY (artwork_id)
+        REFERENCES Artworks(artwork_id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_review_member
+        FOREIGN KEY (member_id)
+        REFERENCES Community_members(member_id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Pratiques (
     artist_id INT NOT NULL,
     discipline_id INT NOT NULL,
+
     PRIMARY KEY (artist_id, discipline_id),
-    CONSTRAINT fk_pratique_artist FOREIGN KEY (artist_id) REFERENCES Artists(artist_id),
-    CONSTRAINT fk_pratique_discipline FOREIGN KEY (discipline_id) REFERENCES Disciplines(discipline_id)
+
+    CONSTRAINT fk_pratique_artist
+        FOREIGN KEY (artist_id)
+        REFERENCES Artists(artist_id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_pratique_discipline
+        FOREIGN KEY (discipline_id)
+        REFERENCES Disciplines(discipline_id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Possedes (
     artwork_id INT NOT NULL,
     tag_id INT NOT NULL,
+
     PRIMARY KEY (artwork_id, tag_id),
-    CONSTRAINT fk_possede_artwork FOREIGN KEY (artwork_id) REFERENCES Artworks(artwork_id),
-    CONSTRAINT fk_possede_tag FOREIGN KEY (tag_id) REFERENCES Artwork_Tags(tag_id)
+
+    CONSTRAINT fk_possede_artwork
+        FOREIGN KEY (artwork_id)
+        REFERENCES Artworks(artwork_id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_possede_tag
+        FOREIGN KEY (tag_id)
+        REFERENCES Artwork_Tags(tag_id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Exposes (
     artwork_id INT NOT NULL,
     exhibition_id INT NOT NULL,
+
     PRIMARY KEY (artwork_id, exhibition_id),
-    CONSTRAINT fk_expose_artwork FOREIGN KEY (artwork_id) REFERENCES Artworks(artwork_id),
-    CONSTRAINT fk_expose_exhibition FOREIGN KEY (exhibition_id) REFERENCES Exhibitions(exhibition_id)
+
+    CONSTRAINT fk_expose_artwork
+        FOREIGN KEY (artwork_id)
+        REFERENCES Artworks(artwork_id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_expose_exhibition
+        FOREIGN KEY (exhibition_id)
+        REFERENCES Exhibitions(exhibition_id)
+        ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS Prefers (
     member_id INT NOT NULL,
     discipline_id INT NOT NULL,
+
     PRIMARY KEY (member_id, discipline_id),
-    CONSTRAINT fk_prefere_member FOREIGN KEY (member_id) REFERENCES Community_members(member_id),
-    CONSTRAINT fk_prefere_discipline FOREIGN KEY (discipline_id) REFERENCES Disciplines(discipline_id)
+
+    CONSTRAINT fk_prefere_member
+        FOREIGN KEY (member_id)
+        REFERENCES Community_members(member_id)
+        ON DELETE CASCADE,
+
+    CONSTRAINT fk_prefere_discipline
+        FOREIGN KEY (discipline_id)
+        REFERENCES Disciplines(discipline_id)
+        ON DELETE CASCADE
 );

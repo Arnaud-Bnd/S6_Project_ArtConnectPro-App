@@ -2,6 +2,7 @@ package com.project.artconnect.util;
 
 import com.project.artconnect.dao.*;
 
+import com.project.artconnect.dao.impl.DisciplineDaoImpl;
 import com.project.artconnect.persistence.*;
 
 import com.project.artconnect.service.*;
@@ -19,12 +20,14 @@ public class ServiceProvider {
     private static final ExhibitionDao exhibitionDao = new JdbcExhibitionDao();
     private static final GalleryDao galleryDao = new JdbcGalleryDao();
     private static final WorkshopDao workshopDao = new JdbcWorkshopDao();
+    private static final DisciplineDaoImpl disciplineDao = new DisciplineDaoImpl();
 
     private static final JdbcArtistService artistService = new JdbcArtistService(artistDao);
     private static final JdbcArtworkService artworkService = new JdbcArtworkService(artworkDao);
     private static final JdbcCommunityService communityService = new JdbcCommunityService(communityMemberDao);
     private static final JdbcWorkshopService workshopService = new JdbcWorkshopService(workshopDao);
     private static final JdbcGalleryService galleryService = new JdbcGalleryService(galleryDao);
+    private static final JdbcDisciplineService disciplineService = new JdbcDisciplineService(disciplineDao);
 
 //    static {
 //        // Initialize services with their dependencies
@@ -55,4 +58,6 @@ public class ServiceProvider {
     public static WorkshopService getWorkshopService() {
         return workshopService;
     }
+
+    public static DisciplineService getDisciplineService() { return disciplineService; }
 }
