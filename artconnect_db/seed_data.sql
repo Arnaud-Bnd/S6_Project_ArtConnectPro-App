@@ -121,3 +121,15 @@ INSERT INTO Reviews (rating, comment, review_date, artwork_id, member_id) VALUES
 (5, 'Très belle œuvre.', '2025-01-20', 1, 1),
 (4, 'Bonne sculpture.', '2025-01-25', 3, 2),
 (5, 'Magnifique série.', '2025-02-01', 5, 3);
+
+INSERT INTO pratiques (artist_id, discipline_id) VALUES
+(1, 1), -- Sophie Marceau → Peinture
+(2, 2), -- Lucas Durand → Sculpture
+(3, 3), -- Amina Benali → Photographie
+(4, 1), -- Thomas Leclerc → Peinture
+(5, 7), -- Chloé Petit → Illustration
+(6, 5), -- Marc Fontaine → Céramique
+(7, 4), -- Isabelle Moreau → Gravure
+(8, 6), -- Karim El Fassi → Art numérique
+(9, 1), -- Elena Vasquez → Peinture
+(10, 8); -- Pierre Guillot → Vitrail

@@ -67,6 +67,7 @@
             <TableColumn fx:id="cityColumn" text="City" prefWidth="150" />
             <TableColumn fx:id="emailColumn" text="Email" prefWidth="200" />
             <TableColumn fx:id="yearColumn" text="Birth Year" prefWidth="100" />
+            <TableColumn fx:id="disciplinesColumn" text="Disciplines" prefWidth="200" />
             <TableColumn fx:id="phoneColumn" text="Phone" prefWidth="120" />
             <TableColumn fx:id="websiteColumn" text="Website" prefWidth="180" />
             <TableColumn fx:id="activeColumn" text="Active" prefWidth="80" />

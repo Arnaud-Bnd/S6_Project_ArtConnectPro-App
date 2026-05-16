@@ -27,6 +27,8 @@ public class ArtistController {
     @FXML
     private TableColumn<Artist, Integer> yearColumn;
     @FXML
+    private TableColumn<Artist, String> disciplinesColumn;
+    @FXML
     private TableColumn<Artist, String> phoneColumn;
     @FXML
     private TableColumn<Artist, String> websiteColumn;
@@ -68,6 +70,16 @@ public class ArtistController {
         cityColumn.setCellValueFactory(new PropertyValueFactory<>("city"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("contactEmail"));
         yearColumn.setCellValueFactory(new PropertyValueFactory<>("birthYear"));
+        disciplinesColumn.setCellValueFactory(cellData -> {
+            Artist artist = cellData.getValue();
+
+            String disciplines = artist.getDisciplines()
+                    .stream()
+                    .map(Discipline::getName)
+                    .collect(java.util.stream.Collectors.joining(", "));
+
+            return new javafx.beans.property.SimpleStringProperty(disciplines);
+        });
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
         websiteColumn.setCellValueFactory(new PropertyValueFactory<>("website"));
         activeColumn.setCellValueFactory(new PropertyValueFactory<>("active"));
@@ -177,6 +189,13 @@ public class ArtistController {
                                     .orElse("")
                     );
                 });
+        artistService.getAllArtists().forEach(a -> {
+            System.out.println("ARTIST = " + a.getName());
+            System.out.println("DISCIPLINES SIZE = " + a.getDisciplines().size());
+            a.getDisciplines().forEach(d ->
+                    System.out.println(" - " + d.getName())
+            );
+        });
     }
 
     @FXML
