@@ -12,9 +12,11 @@ import java.util.List;
 public class JdbcExhibitionDao implements ExhibitionDao {
 
     private static final String SELECT_ALL = """
-        SELECT exhibition_id, title, start_date, end_date,
-               description, gallery_id, curator_name, theme
-        FROM Exhibitions
+        SELECT e.exhibition_id, e.title, e.start_date, e.end_date,
+               e.description, e.curator_name, e.theme,
+               g.gallery_id, g.name AS gallery_name
+        FROM Exhibitions e
+        LEFT JOIN Galleries g ON e.gallery_id = g.gallery_id
     """;
 
     private static final String SELECT_BY_ID =
@@ -147,6 +149,7 @@ public class JdbcExhibitionDao implements ExhibitionDao {
         if (!rs.wasNull()) {
             Gallery g = new Gallery();
             g.setId(galleryId);
+            g.setName(rs.getString("gallery_name"));
             e.setGallery(g);
         }
 
