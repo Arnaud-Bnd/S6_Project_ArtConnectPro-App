@@ -1,50 +1,62 @@
 USE artconnect_db;
 
+/* =========================
+   ARTISTS
+========================= */
 INSERT INTO Artists (name, city, contact_email, phone, birth_year, bio, website, social_media, is_active) VALUES
-('Sophie Marceau', 'Paris', 'sophie.marceau@art.fr', '0612345678', 1990, 'Peintre expressionniste spécialisée dans les portraits urbains. Exposée dans plus de 15 galeries en Europe.', 'https://sophiemarceau.art', '@sophieart_insta', TRUE),
-('Lucas Durand', 'Lyon', 'lucas.durand@studio.fr', '0623456789', 1985, 'Sculpteur contemporain travaillant principalement le bronze et le béton. Lauréat du Prix de la Sculpture 2019.', 'https://lucasdurand.com', '@lucas_sculpture', TRUE),
-('Amina Benali', 'Marseille', 'amina.benali@creative.fr', '0634567890', 1992, 'Photographe documentaire et artiste numérique. Ses œuvres explorent l identité et la diaspora.', 'https://aminabenali.fr', '@aminaphotography', TRUE),
-('Thomas Leclerc', 'Bordeaux', 'thomas.leclerc@arts.fr', '0645678901', 1978, 'Peintre abstrait influencé par le mouvement Fluxus. Professeur aux Beaux-Arts de Bordeaux.', 'https://thomasleclerc.art', '@thomasabstract', TRUE),
-('Chloé Petit', 'Nantes', 'chloe.petit@design.fr', '0656789012', 1995, 'Illustratrice et aquarelliste. Collabore régulièrement avec des maisons d\'édition parisiennes.', 'https://chloepetit.fr', '@chloe_watercolor', TRUE),
-('Marc Fontaine', 'Toulouse', 'marc.fontaine@atelier.fr', '0667890123', 1982, 'Céramiste et artisan d\'art. Fondateur de l\'atelier collectif "Terre & Feu" à Toulouse.', 'https://terreetfeu.fr', '@marc_ceramique', TRUE),
-('Isabelle Moreau', 'Strasbourg', 'isabelle.moreau@galerie.fr', '0678901234', 1975, 'Graveuse et lithographe reconnue. Ses estampes figurent dans plusieurs collections nationales.', 'https://isabellemoreau.eu', '@isabelle_gravure', FALSE),
-('Karim El Fassi', 'Lille', 'karim.elfassi@studio.fr', '0689012345', 1988, 'Artiste multimédia et vidéaste. Ses installations ont été présentées à la Biennale de Venise 2022.', 'https://karimelfassi.com', '@karim_multimedia', TRUE),
-('Elena Vasquez', 'Nice', 'elena.vasquez@artstudio.fr', '0690123456', 1993, 'Peintre surréaliste d\'origine espagnole. Ses toiles mêlent onirisme et mythologie.', 'https://elenavasquez.art', '@elena_surrealisme', TRUE),
-('Pierre Guillot', 'Rennes', 'pierre.guillot@craft.fr', '0601234567', 1970, 'Maître verrier et artiste plasticien. Plus de 30 ans d\'expérience dans la création de vitraux contemporains.', 'https://pierreguillot.fr', '@pierre_verre', FALSE);
+('Auguste Rodin', 'Paris', 'rodin@art.fr', NULL, 1840, 'Sculpteur majeur du XIXe siècle, pionnier de la sculpture moderne.', 'https://musee-rodin.fr', NULL, FALSE),
+('Claude Monet', 'Giverny', 'monet@art.fr', NULL, 1840, 'Fondateur de l’impressionnisme.', 'https://claudemonet.fr', NULL, FALSE),
+('Victor Hugo', 'Paris', 'hugo@art.fr', NULL, 1802, 'Écrivain romantique majeur.', 'https://victorhugo.fr', NULL, FALSE),
+('Jean-Luc Godard', 'Paris', 'godard@cinema.fr', NULL, 1930, 'Pionnier de la Nouvelle Vague.', 'https://godard-cinema.fr', NULL, FALSE),
+('Ludwig van Beethoven', 'Vienne', 'beethoven@music.fr', NULL, 1770, 'Compositeur classique majeur.', 'https://beethoven-music.fr', NULL, FALSE),
+('Pablo Picasso', 'Mougins', 'picasso@art.fr', NULL, 1881, 'Fondateur du cubisme.', 'https://picasso.fr', NULL, FALSE),
+('Frida Kahlo', 'Mexico', 'kahlo@art.fr', NULL, 1907, 'Peintre symbolique et surréaliste.', 'https://fridakahlo.mx', NULL, FALSE),
+('Albert Camus', 'Paris', 'camus@art.fr', NULL, 1913, 'Écrivain existentialiste.', 'https://camus.fr', NULL, FALSE),
+('Hayao Miyazaki', 'Tokyo', 'miyazaki@anime.fr', NULL, 1941, 'Maître de l’animation japonaise.', 'https://ghibli.jp', '@ghibli_official', TRUE),
+('Édith Piaf', 'Paris', 'piaf@music.fr', NULL, 1915, 'Chanteuse emblématique française.', 'https://edithpiaf.fr', NULL, FALSE),
+('Andy Warhol', 'New York', 'warhol@art.fr', NULL, 1928, 'Figure du pop art.', NULL, '@warhol', FALSE),
+('Banksy', NULL, 'banksy@street.art', NULL, 1974, 'Artiste street art anonyme.', NULL, '@banksy', TRUE),
+('Christopher Nolan', 'London', 'nolan@cinema.com', NULL, 1970, 'Réalisateur contemporain majeur.', NULL, '@nolan', TRUE),
+('Hans Zimmer', NULL, 'zimmer@music.com', NULL, 1957, 'Compositeur de musiques de films.', NULL, '@zimmer', TRUE);
 
+
+/* =========================
+   ARTWORKS
+========================= */
 INSERT INTO Artworks (title, creation_year, medium, type, description, dimensions, price, status, artist_id) VALUES
-('Lumières de la Ville', 2021, 'Huile sur toile', 'Peinture', 'Portrait nocturne d''une rue parisienne sous la pluie, jeu de reflets et de lumières artificielles.', '100x80 cm', 3500.00, 'FOR_SALE', 1),
-('Fragments Urbains', 2020, 'Huile sur toile', 'Peinture', 'Série de visages fragmentés évoquant la solitude dans la foule.', '120x90 cm', 4200.00, 'FOR_SALE', 1),
-('L''Éveil', 2019, 'Bronze', 'Sculpture', 'Figure humaine en mouvement, symbolisant l''éveil de la conscience.', '60x30x25 cm', 8500.00, 'SOLD', 2),
-('Méandres', 2022, 'Béton et acier', 'Sculpture', 'Installation abstraite explorant les flux et tensions urbaines.', '200x50x50 cm', 15000.00, 'FOR_SALE', 2),
-('Racines', 2021, 'Photographie numérique', 'Photographie', 'Série de portraits de femmes issues de la diaspora africaine.', '80x60 cm', 1200.00, 'FOR_SALE', 3),
-('Babel Moderne', 2022, 'Photographie argentique', 'Photographie', 'Dyptique représentant des marchés populaires à Marseille et Alger.', '100x70 cm', 2100.00, 'FOR_SALE', 3),
-('Vibrations #3', 2020, 'Acrylique sur toile', 'Peinture', 'Composition abstraite chromatique et rythmique.', '150x150 cm', 5600.00, 'SOLD', 4),
-('Sans Titre XII', 2023, 'Technique mixte', 'Peinture', 'Œuvre expérimentale mêlant collage et peinture.', '90x70 cm', 3100.00, 'FOR_SALE', 4),
-('Jardins Secrets', 2022, 'Aquarelle', 'Illustration', 'Série de 5 illustrations botaniques imaginaires.', '42x30 cm', 850.00, 'FOR_SALE', 5),
-('Contes d''Été', 2023, 'Encre et aquarelle', 'Illustration', 'Illustration narrative pour album jeunesse.', '50x35 cm', 1100.00, 'FOR_SALE', 5),
-('Bol Céladon n°7', 2021, 'Grès émaillé', 'Céramique', 'Bol tourné à la main, cuisson réduction.', '12x20 cm', 320.00, 'SOLD', 6),
-('Vase Flamme', 2022, 'Porcelaine', 'Céramique', 'Vase en porcelaine aux formes organiques.', '35x15 cm', 780.00, 'FOR_SALE', 6),
-('Mémoire Gravée', 2018, 'Eau-forte', 'Gravure', 'Série de 12 estampes sur la mémoire.', '40x30 cm', 2400.00, 'FOR_SALE', 7),
-('Boucle', 2023, 'Vidéo installation', 'Numérique', 'Installation vidéo en boucle.', '4K, 12 min', 6000.00, 'FOR_SALE', 8),
-('Miroirs Brisés', 2022, 'Technique mixte numérique', 'Numérique', 'Installation interactive fragmentant le reflet.', 'Variable', 9500.00, 'SOLD', 8),
-('Songe d''Icare', 2023, 'Huile sur toile', 'Peinture', 'Composition surréaliste contemporaine.', '180x140 cm', 7200.00, 'FOR_SALE', 9),
-('Animus', 2021, 'Acrylique sur bois', 'Peinture', 'Portraits oniriques hybrides.', '60x60 cm', 2800.00, 'FOR_SALE', 9), 
-('Rose Cathédrale', 2015, 'Vitrail', 'Vitrail', 'Vitrail contemporain inspiré des rosaces gothiques.', '80x80 cm', 12000.00, 'FOR_SALE', 10);
+('Le Penseur', 1904, 'Bronze', 'Sculpture', 'Figure philosophique.', '180 cm', 2000000, 'SOLD', 1),
+('Nymphéas', 1916, 'Huile sur toile', 'Peinture', 'Jardin aquatique.', NULL, 5000000, 'SOLD', 2),
+('Les Contemplations', 1856, 'Texte', 'Littérature', 'Recueil poétique.', NULL, NULL, 'SOLD', 3),
+('À bout de souffle', 1960, 'Film', 'Cinéma', 'Nouvelle Vague.', '90 min', NULL, 'SOLD', 4),
+('Symphonie n°9', 1824, 'Partition', 'Musique', 'Ode à la joie.', '70 min', NULL, 'SOLD', 5),
+('Guernica', 1937, 'Huile sur toile', 'Peinture', 'Guerre civile espagnole.', NULL, NULL, 'SOLD', 6),
+('Les Deux Fridas', 1939, 'Huile sur toile', 'Peinture', 'Identité double.', NULL, NULL, 'SOLD', 7),
+('L’Étranger', 1942, 'Roman', 'Littérature', 'Absurdie.', NULL, NULL, 'SOLD', 8),
+('Le Voyage de Chihiro', 2001, 'Animation', 'Cinéma', 'Conte initiatique.', '125 min', NULL, 'SOLD', 9),
+('La Vie en rose', 1947, 'Chanson', 'Musique', 'Chanson iconique.', '3 min', NULL, 'SOLD', 10),
+('Marilyn Diptych', 1962, 'Sérigraphie', 'Peinture', 'Pop art iconique.', NULL, NULL, 'SOLD', 11),
+('Girl with Balloon', 2002, 'Spray paint', 'Street Art', 'Art urbain symbolique.', NULL, NULL, 'FOR_SALE', 12),
+('Inception', 2010, 'Film', 'Cinéma', 'Rêves imbriqués.', '148 min', NULL, 'SOLD', 13),
+('Interstellar OST', 2014, 'Musique', 'Musique', 'Bande originale du film.', '2h', NULL, 'SOLD', 14);
 
+
+/* =========================
+   WORKSHOPS
+========================= */
 INSERT INTO Workshops (title, date_, price, level, duration_minutes, max_participants, location, description, instructor_id) VALUES
-('Introduction à la peinture à l\'huile', '2025-02-10 10:00:00', 75.00, 'Débutant', 180, 12, 'Atelier Sophie Marceau - Paris', 'Bases de la peinture à l\'huile.', 1),
-('Sculpture sur argile - niveau avancé', '2025-03-05 14:00:00', 120.00, 'Avancé', 240, 8, 'Studio Lucas Durand - Lyon', 'Techniques avancées de modelage.', 2),
-('Photographie de rue et reportage', '2025-02-20 09:00:00', 90.00, 'Intermédiaire', 300, 15, 'Marseille Centre', 'Atelier photo en extérieur.', 3),
-('Aquarelle botanique', '2025-04-12 10:00:00', 65.00, 'Débutant', 150, 10, 'Atelier Chloé Petit - Nantes', 'Peinture botanique.', 5),
-('Initiation à la céramique au tour', '2025-03-22 11:00:00', 85.00, 'Débutant', 210, 8, 'Atelier Terre & Feu - Toulouse', 'Tournage de l\'argile.', 6),
-('Gravure sur linogravure', '2025-05-08 15:00:00', 70.00, 'Intermédiaire', 180, 10, 'Atelier Isabelle Moreau - Strasbourg', 'Technique de gravure.', 7),
-('Art numérique et vidéo mapping', '2025-04-25 16:00:00', 150.00, 'Avancé', 360, 6, 'Studio Karim El Fassi - Lille', 'Installation interactive.', 8),
-('Peinture abstraite expressive', '2025-03-15 10:00:00', 80.00, 'Intermédiaire', 180, 12, 'Galerie des Arts - Bordeaux', 'Expression abstraite.', 4),
-('Vitrail contemporain - initiation', '2025-06-07 13:00:00', 95.00, 'Débutant', 240, 6, 'Atelier Pierre Guillot - Rennes', 'Création de vitraux.', 10),
-('Portrait photographique en studio', '2025-05-17 14:00:00', 110.00, 'Intermédiaire', 270, 8, 'Studio Photo Lumière - Nice', 'Portrait en studio.', 3);
+('Introduction sculpture moderne', '2025-03-10 10:00:00', 120, 'Débutant', 240, 10, 'Paris', 'Sculpture contemporaine.', 1),
+('Cinéma contemporain', '2025-05-05 09:00:00', 150, 'Avancé', 300, 8, 'London Studio', 'Analyse filmique.', 13),
+('Musique de film', '2025-06-01 14:00:00', 200, 'Avancé', 360, 6, 'Studio Berlin', 'Composition cinéma.', 14);
 
+
+/* =========================
+   GALLERIES
+========================= */
 INSERT INTO Galleries (name, address, owner_name, opening_hours, contact_phone, rating, website) VALUES
+('Musée Rodin', 'Paris', 'État', '10h-18h', NULL, 4.9, 'https://musee-rodin.fr'),
+('MoMA', 'New York', 'MoMA Org', '10h-18h', NULL, 4.8, 'https://moma.org'),
+('Street Art Gallery', NULL, 'Collectif urbain', '24/7', NULL, 4.5, NULL),
+('Studio Ghibli Museum', 'Tokyo', 'Ghibli', '10h-18h', NULL, 4.9, 'https://ghibli.jp'),
 ('Galerie du Marais', '15 Rue de Bretagne, 75003 Paris', 'Hélène Rousseau', 'Mar-Sam 11h-19h', '0142781234', 4.70, 'https://galeriedumaris.fr'),
 ('Espace Art Lyon', '8 Place Bellecour, 69002 Lyon', 'Antoine Garnier', 'Mer-Dim 10h-18h', '0472345678', 4.20, 'https://espaceartlyon.com'),
 ('La Friche Belle de Mai', '41 Rue Jobin, 13003 Marseille', 'Collectif FBM', 'Mar-Dim 9h-20h', '0491678901', 4.80, 'https://lafriche.org'),
@@ -56,23 +68,24 @@ INSERT INTO Galleries (name, address, owner_name, opening_hours, contact_phone, 
 ('Galerie Azur', '12 Promenade des Anglais, 06000 Nice', 'Marco Ferretti', 'Lun-Sam 10h-19h', '0493567890', 4.00, 'https://galerieazur.com'),
 ('Espace Créatif Rennes', '6 Rue Saint-Melaine, 35000 Rennes', 'Anne-Sophie Riou', 'Jeu-Dim 13h-19h', '0299678901', 3.80, 'https://espacecreatifrennes.fr');
 
-INSERT INTO Artwork_Tags (name) VALUES
-('Abstrait'),
-('Portrait'),
-('Urbain'),
-('Nature'),
-('Surréalisme'),
-('Identité'),
-('Lumière'),
-('Mémoire'),
-('Corps'),
-('Numérique'),
-('Contemporain'),
-('Traditionnel'),
-('Politique'),
-('Onirisme'),
-('Minimalisme');
 
+/* =========================
+   TAGS
+========================= */
+INSERT INTO Artwork_Tags (name) VALUES
+('Sculpture'),
+('Peinture'),
+('Cinéma'),
+('Musique'),
+('Littérature'),
+('Street Art'),
+('Pop Art'),
+('Animation');
+
+
+/* =========================
+   COMMUNITY MEMBERS
+========================= */
 INSERT INTO Community_members (name, email, birth_year, city, membership_type, phone) VALUES
 ('Alice Martin', 'alice.martin@gmail.com', 1988, 'Paris', 'Premium', '0611111111'),
 ('Bruno Lefevre', 'bruno.lefevre@hotmail.fr', 1975, 'Lyon', 'Standard', '0622222222'),
@@ -87,22 +100,42 @@ INSERT INTO Community_members (name, email, birth_year, city, membership_type, p
 ('Karine Vidal', 'karine.vidal@orange.fr', 1970, 'Strasbourg', 'Premium', '0621212121'),
 ('Laurent Schmitt', 'laurent.schmitt@gmail.com', 2000, 'Paris', 'Étudiant', '0632323232');
 
+
+/* =========================
+   DISCIPLINES
+========================= */
 INSERT INTO Disciplines (name) VALUES
 ('Peinture'),
 ('Sculpture'),
 ('Photographie'),
 ('Gravure'),
-('Céramique'),
-('Art numérique'),
-('Illustration'),
-('Vitrail'),
-('Installation'),
-('Dessin');
+('Cinéma'),
+('Littérature'),
+('Musique'),
+('Street Art'),
+('Animation'),
+('Pop Art');
 
+
+/* =========================
+   EXHIBITIONS
+========================= */
 INSERT INTO Exhibitions (title, end_date, description, curator_name, start_date, theme, gallery_id) VALUES
-('Visages de la Ville', '2025-03-30', 'Exposition collective autour du portrait urbain contemporain.', 'Marie Cuvier', '2025-02-01', 'Portrait Urbain', 1),
-('Matières Vivantes', '2025-04-20', 'Exposition sculpture et céramique.', 'Jean-Paul Tessier', '2025-03-01', 'Sculpture & Matière', 2);
+('Les Maîtres de la Sculpture', '2025-06-30', 'Exposition consacrée aux grandes œuvres sculpturales du XIXe siècle.', 'Claire Dumont', '2025-03-01', 'Sculpture classique', 1),
+('Lumières Impressionnistes', '2025-07-15', 'Immersion dans les paysages et jeux de lumière impressionnistes.', 'Paul Rivière', '2025-04-01', 'Impressionnisme', 1),
+('Cubisme et Modernité', '2025-09-01', 'Exploration des formes et perspectives du cubisme.', 'Sophie Lambert', '2025-05-10', 'Cubisme', 2),
+('Voix de la Littérature Française', '2025-08-20', 'Exposition autour des manuscrits et œuvres littéraires françaises.', 'Marie Valois', '2025-05-01', 'Littérature', 2),
+('Cinéma et Nouvelle Vague', '2025-10-10', 'Projection et analyse des films majeurs de la Nouvelle Vague.', 'Julien Moreau', '2025-06-01', 'Cinéma', 3),
+('Musique et Émotions', '2025-11-01', 'Exposition immersive autour des grands compositeurs et interprètes.', 'Antoine Berger', '2025-07-01', 'Musique', 2),
+('Le Monde de Miyazaki', '2025-12-20', 'Univers poétique et écologique des films de Miyazaki.', 'Yuki Tanaka', '2025-09-01', 'Animation japonaise', 4),
+('Street Art : Banksy et Après', '2025-08-30', 'Regards contemporains sur le street art engagé.', 'Nina Rodriguez', '2025-05-20', 'Street Art', 3),
+('Pop Art Forever', '2025-09-15', 'Retour sur les icônes du Pop Art américain.', 'Emma Collins', '2025-06-10', 'Pop Art', 2),
+('Femmes et Art Moderne', '2025-10-30', 'Exposition dédiée aux artistes féminines majeures du XXe siècle.', 'Camille Renard', '2025-07-15', 'Art moderne', 1);
 
+
+/* =========================
+   BOOKINGS
+========================= */
 INSERT INTO Bookings (booking_date, payment_status, workshop_id, member_id) VALUES
 ('2025-01-15', 'Payé', 1, 1),
 ('2025-01-20', 'Payé', 2, 2),
@@ -117,20 +150,31 @@ INSERT INTO Bookings (booking_date, payment_status, workshop_id, member_id) VALU
 ('2025-03-10', 'Payé', 1, 11),
 ('2025-03-12', 'En attente', 2, 12);
 
+
+/* =========================
+   REVIEWS
+========================= */
 INSERT INTO Reviews (rating, comment, review_date, artwork_id, member_id) VALUES
 (5, 'Très belle œuvre.', '2025-01-20', 1, 1),
 (4, 'Bonne sculpture.', '2025-01-25', 3, 2),
 (5, 'Magnifique série.', '2025-02-01', 5, 3);
 
-INSERT INTO pratiques (artist_id, discipline_id) VALUES
-(1, 1), -- Sophie Marceau → Peinture
-(2, 2), -- Lucas Durand → Sculpture
-(3, 3), -- Amina Benali → Photographie
-(4, 1), -- Thomas Leclerc → Peinture
-(5, 7), -- Chloé Petit → Illustration
-(6, 5), -- Marc Fontaine → Céramique
-(7, 4), -- Isabelle Moreau → Gravure
-(8, 6), -- Karim El Fassi → Art numérique
-(9, 1), -- Elena Vasquez → Peinture
-(10, 8), -- Pierre Guillot → Vitrail
-(1, 8); -- Sophie Marceau → Vitrail
+
+/* =========================
+   PRATIQUES
+========================= */
+INSERT INTO Pratiques (artist_id, discipline_id) VALUES
+(1, 2), -- Rodin → Sculpture
+(2, 1), -- Monet → Peinture
+(3, 6), -- Victor Hugo → Littérature
+(4, 5), -- Godard → Cinéma
+(5, 7), -- Beethoven → Musique
+(6, 1), -- Picasso → Peinture
+(7, 1), -- Frida Kahlo → Peinture
+(8, 6), -- Camus → Littérature
+(9, 9),  -- Miyazaki → Animation
+(10, 7), -- Édith Piaf → Musique
+(11, 10), -- Andy Warhol → Pop Art
+(12, 8), -- Banksy → Street Art
+(13, 5), -- Christopher Nolan → Cinéma
+(14, 7); -- Hans Zimmer → Musique
