@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS Artists (
     city VARCHAR(50),
     contact_email VARCHAR(50) UNIQUE NOT NULL,
     phone VARCHAR(10),
-    birth_year YEAR,
+    birth_year SMALLINT,
     bio TEXT,
     website VARCHAR(255),
     social_media VARCHAR(255),
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS Artists (
 CREATE TABLE IF NOT EXISTS Artworks (
     artwork_id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(50) NOT NULL,
-    creation_year YEAR,
+    creation_year SMALLINT,
     medium VARCHAR(50),
     type VARCHAR(50),
     description TEXT,
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS Community_members (
     member_id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE,
-    birth_year YEAR,
+    birth_year SMALLINT,
     city VARCHAR(50),
     membership_type VARCHAR(50),
     phone VARCHAR(10)

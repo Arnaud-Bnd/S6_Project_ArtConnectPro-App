@@ -132,4 +132,5 @@ INSERT INTO pratiques (artist_id, discipline_id) VALUES
 (7, 4), -- Isabelle Moreau → Gravure
 (8, 6), -- Karim El Fassi → Art numérique
 (9, 1), -- Elena Vasquez → Peinture
-(10, 8); -- Pierre Guillot → Vitrail
+(10, 8), -- Pierre Guillot → Vitrail
+(1, 8); -- Sophie Marceau → Vitrail
