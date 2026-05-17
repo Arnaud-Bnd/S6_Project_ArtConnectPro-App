@@ -189,13 +189,6 @@ public class ArtistController {
                                     .orElse("")
                     );
                 });
-        artistService.getAllArtists().forEach(a -> {
-            System.out.println("ARTIST = " + a.getName());
-            System.out.println("DISCIPLINES SIZE = " + a.getDisciplines().size());
-            a.getDisciplines().forEach(d ->
-                    System.out.println(" - " + d.getName())
-            );
-        });
     }
 
     @FXML
@@ -254,7 +247,6 @@ public class ArtistController {
 
     @FXML
     private void handleUpdate() {
-
         Artist selectedArtist = artistTable.getSelectionModel().getSelectedItem();
 
         if (selectedArtist == null) {
@@ -320,7 +312,6 @@ public class ArtistController {
     }
 
     private void clearForm() {
-
         nameField.clear();
         cityField.clear();
         emailField.clear();
