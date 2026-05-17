@@ -1,19 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
 
 <VBox spacing="10.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.artconnect.ui.ExhibitionController">
     <padding>
-        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+        <Insets top="10.0" right="10.0" bottom="10.0" left="10.0"/>
     </padding>
+
+    <!-- FORM -->
+    <GridPane hgap="10.0" vgap="10.0">
+        <Label text="ID:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="idField" editable="false" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Title:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+        <TextField fx:id="titleField" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+
+        <Label text="Start Date:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <DatePicker fx:id="startDatePicker" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="End Date:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+        <DatePicker fx:id="endDatePicker" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+
+        <Label text="Gallery:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="galleryField" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <Label text="Curator:" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+        <TextField fx:id="curatorField" GridPane.rowIndex="2" GridPane.columnIndex="3"/>
+
+        <Label text="Theme:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <TextField fx:id="themeField" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+        <Label text="Description:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <TextArea fx:id="descriptionField" prefRowCount="3" GridPane.rowIndex="4" GridPane.columnIndex="1" GridPane.columnSpan="3"/>
+    </GridPane>
+
+    <!-- TABLE -->
     <TableView fx:id="exhibitionTable" VBox.vgrow="ALWAYS">
         <columns>
-            <TableColumn fx:id="titleColumn" text="Title" prefWidth="200" />
-            <TableColumn fx:id="galleryColumn" text="Gallery" prefWidth="150" />
-            <TableColumn fx:id="dateColumn" text="Start Date" prefWidth="120" />
-            <TableColumn fx:id="themeColumn" text="Theme" prefWidth="180" />
+            <TableColumn fx:id="idColumn" text="ID" prefWidth="70"/>
+            <TableColumn fx:id="titleColumn" text="Title" prefWidth="180"/>
+            <TableColumn fx:id="galleryColumn" text="Gallery" prefWidth="150"/>
+            <TableColumn fx:id="startDateColumn" text="Start Date" prefWidth="120"/>
+            <TableColumn fx:id="endDateColumn" text="End Date" prefWidth="120"/>
+            <TableColumn fx:id="curatorColumn" text="Curator" prefWidth="150"/>
+            <TableColumn fx:id="themeColumn" text="Theme" prefWidth="150"/>
+            <TableColumn fx:id="descriptionColumn" text="Description" prefWidth="250"/>
         </columns>
     </TableView>
 </VBox>

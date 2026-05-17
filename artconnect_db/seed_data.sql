@@ -140,15 +140,15 @@ INSERT INTO Bookings (booking_date, payment_status, workshop_id, member_id) VALU
 ('2025-01-15', 'Payé', 1, 1),
 ('2025-01-20', 'Payé', 2, 2),
 ('2025-01-22', 'En attente', 3, 3),
-('2025-02-01', 'Payé', 4, 4),
-('2025-02-05', 'Payé', 5, 5),
-('2025-02-10', 'Annulé', 6, 6),
-('2025-02-15', 'Payé', 7, 7),
-('2025-02-18', 'Payé', 8, 8),
-('2025-03-01', 'En attente', 9, 9),
-('2025-03-05', 'Payé', 10, 10),
-('2025-03-10', 'Payé', 1, 11),
-('2025-03-12', 'En attente', 2, 12);
+('2025-02-01', 'Payé', 1, 4),
+('2025-02-05', 'Payé', 2, 5),
+('2025-02-10', 'Annulé', 3, 6),
+('2025-02-15', 'Payé', 1, 7),
+('2025-02-18', 'Payé', 2, 8),
+('2025-03-01', 'En attente', 3, 9),
+('2025-03-05', 'Payé', 1, 10),
+('2025-03-10', 'Payé', 2, 11),
+('2025-03-12', 'En attente', 3, 12);
 
 
 /* =========================
@@ -156,8 +156,8 @@ INSERT INTO Bookings (booking_date, payment_status, workshop_id, member_id) VALU
 ========================= */
 INSERT INTO Reviews (rating, comment, review_date, artwork_id, member_id) VALUES
 (5, 'Très belle œuvre.', '2025-01-20', 1, 1),
-(4, 'Bonne sculpture.', '2025-01-25', 3, 2),
-(5, 'Magnifique série.', '2025-02-01', 5, 3);
+(4, 'Livre profondément touchant.', '2025-01-25', 3, 2),
+(5, 'Composition musicale incroyable.', '2025-02-01', 5, 3);
 
 
 /* =========================
