@@ -1,37 +1,61 @@
 package com.project.artconnect.ui;
 
 import com.project.artconnect.model.Artwork;
+import com.project.artconnect.model.Artist;
 import com.project.artconnect.service.ArtworkService;
 import com.project.artconnect.service.ArtistService;
 import com.project.artconnect.util.ServiceProvider;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.List;
 
 public class ArtworkController {
+
     @FXML
     private TextField searchField;
+
     @FXML
     private TableView<Artwork> artworkTable;
+
     @FXML
     private TableColumn<Artwork, String> titleColumn;
+    @FXML
+    private TableColumn<Artwork, String> artistColumn;
     @FXML
     private TableColumn<Artwork, String> typeColumn;
     @FXML
     private TableColumn<Artwork, Double> priceColumn;
     @FXML
     private TableColumn<Artwork, String> statusColumn;
-    @FXML
-    private TableColumn<Artwork, String> artistColumn;
 
+    // NOUVELLES COLONNES
+    @FXML
+    private TableColumn<Artwork, Integer> yearColumn;
+    @FXML
+    private TableColumn<Artwork, String> mediumColumn;
+    @FXML
+    private TableColumn<Artwork, String> dimensionsColumn;
+    @FXML
+    private TableColumn<Artwork, String> descriptionColumn;
+
+    @FXML
+    private TextField idField;
     @FXML
     private TextField titleField;
     @FXML
+    private TextField creationYearField;
+    @FXML
     private TextField typeField;
+    @FXML
+    private TextField mediumField;
+    @FXML
+    private TextField dimensionsField;
+    @FXML
+    private TextArea descriptionField;
     @FXML
     private TextField priceField;
     @FXML
@@ -44,43 +68,42 @@ public class ArtworkController {
 
     @FXML
     public void initialize() {
-        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
-        typeColumn.setCellValueFactory(new PropertyValueFactory<>("type"));
-        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-
-        statusColumn.setCellValueFactory(cellData -> new SimpleStringProperty(
-                cellData.getValue().getStatus() != null ? cellData.getValue().getStatus().name() : ""));
-
-        artistColumn.setCellValueFactory(cellData -> new SimpleStringProperty(
-                cellData.getValue().getArtist() != null ? cellData.getValue().getArtist().getName() : "Unknown"));
-
+        titleColumn.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("title"));
+        typeColumn.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("type"));
+        priceColumn.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("price"));
+        yearColumn.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("creationYear"));
+        mediumColumn.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("medium"));
+        dimensionsColumn.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("dimensions"));
+        descriptionColumn.setCellValueFactory(new javafx.scene.control.cell.PropertyValueFactory<>("description"));
+        statusColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStatus() != null ? cellData.getValue().getStatus().name() : ""));
+        artistColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getArtist() != null ? cellData.getValue().getArtist().getName() : "Unknown"));
         statusCombo.setItems(FXCollections.observableArrayList(Artwork.Status.values()));
 
-        try {
-            artworkTable.setItems(FXCollections.observableArrayList(artworkService.getAllArtworks()));
-        } catch (Exception e) {
-            showError("Erreur lors du chargement des œuvres : " + e.getMessage());
-        }
+        refreshTable();
 
-        artworkTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, selectedArtwork) -> {
-            if (selectedArtwork != null) {
-                titleField.setText(selectedArtwork.getTitle());
-                typeField.setText(selectedArtwork.getType());
-                priceField.setText(String.valueOf(selectedArtwork.getPrice()));
-                statusCombo.setValue(selectedArtwork.getStatus());
-                artistField.setText(selectedArtwork.getArtist() != null ? selectedArtwork.getArtist().getName() : "");
+        artworkTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, selected) -> {
+            if (selected != null) {
+                idField.setText(String.valueOf(selected.getId()));
+                titleField.setText(selected.getTitle());
+                creationYearField.setText(selected.getCreationYear() != null ? String.valueOf(selected.getCreationYear()) : "");
+                typeField.setText(selected.getType());
+                mediumField.setText(selected.getMedium());
+                dimensionsField.setText(selected.getDimensions());
+                descriptionField.setText(selected.getDescription());
+                priceField.setText(String.valueOf(selected.getPrice()));
+                statusCombo.setValue(selected.getStatus());
+                artistField.setText(selected.getArtist() != null ? selected.getArtist().getName() : "");
             }
         });
     }
-    
+
     @FXML
     private void handleSearch() {
         String query = searchField.getText();
 
         List<Artwork> results = artworkService.getAllArtworks()
                 .stream()
-                .filter(a -> query == null
-                        || query.isBlank()
+                .filter(a -> query == null || query.isBlank()
                         || a.getTitle().toLowerCase().contains(query.toLowerCase()))
                 .toList();
 
@@ -100,6 +123,13 @@ public class ArtworkController {
 
             artwork.setTitle(titleField.getText());
             artwork.setType(typeField.getText());
+            artwork.setMedium(mediumField.getText());
+            artwork.setDimensions(dimensionsField.getText());
+            artwork.setDescription(descriptionField.getText());
+
+            if (!creationYearField.getText().isBlank()) {
+                artwork.setCreationYear(Integer.parseInt(creationYearField.getText()));
+            }
 
             double price;
             try {
@@ -111,93 +141,99 @@ public class ArtworkController {
             artwork.setPrice(price);
 
             artwork.setStatus(statusCombo.getValue());
-            artwork.setArtist(artistService.getArtistByName(artistField.getText()).orElse(null));
+
+            Artist artist = artistService.getArtistByName(artistField.getText()).orElse(null);
+            artwork.setArtist(artist);
 
             artworkService.createArtwork(artwork);
 
             refreshTable();
             clearForm();
+
         } catch (Exception e) {
-            showError("Erreur lors de l'ajout de l'œuvre : " + e.getMessage());
+            showError("Erreur ajout œuvre : " + e.getMessage());
         }
     }
 
     @FXML
     private void handleUpdate() {
-        Artwork selectedArtwork = artworkTable.getSelectionModel().getSelectedItem();
+        Artwork selected = artworkTable.getSelectionModel().getSelectedItem();
 
-        if (selectedArtwork == null) {
-            showAlert("Sélectionnez un œuvre à mettre à jour.");
+        if (selected == null) {
+            showAlert("Sélectionnez une œuvre.");
             return;
         }
 
         try {
-            selectedArtwork.setTitle(titleField.getText());
-            selectedArtwork.setType(typeField.getText());
+            selected.setTitle(titleField.getText());
+            selected.setType(typeField.getText());
+            selected.setMedium(mediumField.getText());
+            selected.setDimensions(dimensionsField.getText());
+            selected.setDescription(descriptionField.getText());
 
-            double price;
-            try {
-                price = Double.parseDouble(priceField.getText());
-            } catch (NumberFormatException e) {
-                showError("Prix invalide.");
-                return;
+            if (!creationYearField.getText().isBlank()) {
+                selected.setCreationYear(Integer.parseInt(creationYearField.getText()));
             }
-            selectedArtwork.setPrice(price);
 
-            selectedArtwork.setStatus(statusCombo.getValue());
-            selectedArtwork.setArtist(artistService.getArtistByName(artistField.getText()).orElse(null));
+            selected.setPrice(Double.parseDouble(priceField.getText()));
+            selected.setStatus(statusCombo.getValue());
 
-            artworkService.updateArtwork(selectedArtwork);
+            selected.setArtist(
+                    artistService.getArtistByName(artistField.getText()).orElse(null)
+            );
+
+            artworkService.updateArtwork(selected);
 
             refreshTable();
             clearForm();
+
         } catch (Exception e) {
-            showError("Erreur lors de la mise à jour de l'œuvre : " + e.getMessage());
+            showError("Erreur update œuvre : " + e.getMessage());
         }
     }
 
     @FXML
     private void handleDelete() {
-        Artwork selectedArtwork = artworkTable.getSelectionModel().getSelectedItem();
+        Artwork selected = artworkTable.getSelectionModel().getSelectedItem();
 
-        if (selectedArtwork == null) {
-            showAlert("Sélectionnez un œuvre à supprimer.");
+        if (selected == null) {
+            showAlert("Sélectionnez une œuvre.");
             return;
         }
 
-        try {
-            artworkService.deleteArtwork(selectedArtwork.getTitle());
-            refreshTable();
-            clearForm();
-        } catch (Exception e) {
-            showError("Erreur lors de la suppression de l'œuvre : " + e.getMessage());
-        }
+        artworkService.deleteArtwork(selected.getTitle());
+        refreshTable();
+        clearForm();
     }
 
     private void refreshTable() {
-        artworkTable.setItems(FXCollections.observableArrayList(artworkService.getAllArtworks()));
+        artworkTable.setItems(FXCollections.observableArrayList(
+                artworkService.getAllArtworks()
+        ));
     }
 
     private void clearForm() {
+        idField.clear();
         titleField.clear();
+        creationYearField.clear();
         typeField.clear();
+        mediumField.clear();
+        dimensionsField.clear();
+        descriptionField.clear();
         priceField.clear();
         statusCombo.setValue(null);
         artistField.clear();
     }
 
-    private void showError(String message) {
+    private void showError(String msg) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText("ERROR");
-        alert.setContentText(message);
+        alert.setContentText(msg);
         alert.showAndWait();
     }
 
-    private void showAlert(String message) {
+    private void showAlert(String msg) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Warning");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
+        alert.setContentText(msg);
         alert.showAndWait();
     }
 }
