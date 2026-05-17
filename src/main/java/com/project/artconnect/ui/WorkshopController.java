@@ -27,13 +27,10 @@ public class WorkshopController {
     @FXML private TableColumn<Workshop, Double> priceColumn;
     @FXML private TableColumn<Workshop, String> levelColumn;
 
-    // NOUVELLES COLONNES
     @FXML private TableColumn<Workshop, Integer> durationColumn;
     @FXML private TableColumn<Workshop, Integer> maxParticipantsColumn;
     @FXML private TableColumn<Workshop, String> locationColumn;
     @FXML private TableColumn<Workshop, String> descriptionColumn;
-
-    @FXML private Label workshopDetailsLabel;
 
     @FXML private Label instructorDetailsLabel;
     @FXML private Label durationLabel;
@@ -47,7 +44,6 @@ public class WorkshopController {
     @FXML
     public void initialize() {
 
-        // TABLE MAPPING
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
         dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -71,13 +67,6 @@ public class WorkshopController {
         workshopTable.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, selected) -> {
 
             if (selected != null) {
-
-                workshopDetailsLabel.setText(
-                        "Workshop: " + selected.getTitle()
-                                + "\nDate: " + selected.getDate()
-                                + "\nPrice: " + selected.getPrice()
-                                + "\nLevel: " + selected.getLevel()
-                );
 
                 instructorDetailsLabel.setText(
                         selected.getInstructor() != null
@@ -116,7 +105,6 @@ public class WorkshopController {
         searchField.clear();
         refreshTable();
 
-        workshopDetailsLabel.setText("");
         instructorDetailsLabel.setText("");
         durationLabel.setText("");
         maxParticipantsLabel.setText("");
