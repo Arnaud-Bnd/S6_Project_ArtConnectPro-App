@@ -5,27 +5,48 @@
 <?import javafx.scene.layout.*?>
 
 <VBox spacing="10.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.project.artconnect.ui.GalleryController">
-
     <padding>
         <Insets top="10.0" right="10.0" bottom="10.0" left="10.0"/>
     </padding>
 
-    <!-- Search -->
+    <!-- SEARCH -->
     <HBox spacing="10.0">
         <TextField fx:id="searchField" promptText="Search galleries..." HBox.hgrow="ALWAYS"/>
         <Button text="Search" onAction="#handleSearch"/>
         <Button text="Reset" onAction="#handleReset"/>
     </HBox>
 
-    <!-- Liste galleries -->
+    <!-- LIST -->
     <Label text="Galleries"/>
-    <ListView fx:id="galleryList" prefHeight="250"/>
+    <ListView fx:id="galleryList" prefHeight="220"/>
 
-    <!-- Détails -->
+    <!-- DETAILS COMPLETS -->
     <Label text="Gallery Details"/>
-    <Label fx:id="galleryDetailsLabel" wrapText="true"/>
 
-    <!-- Exhibitions -->
+    <GridPane hgap="10.0" vgap="6.0">
+        <Label text="Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <Label fx:id="nameLabel" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Address:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <Label fx:id="addressLabel" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Owner:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <Label fx:id="ownerLabel" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <Label text="Opening Hours:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+        <Label fx:id="openingHoursLabel" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+        <Label text="Phone:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+        <Label fx:id="phoneLabel" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+        <Label text="Rating:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+        <Label fx:id="ratingLabel" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+        <Label text="Website:" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+        <Label fx:id="websiteLabel" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <!-- EXHIBITIONS -->
     <Label text="Exhibitions"/>
     <ListView fx:id="exhibitionList" prefHeight="150"/>
 </VBox>
