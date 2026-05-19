@@ -48,9 +48,6 @@
 
         <Label text="Disciplines:" GridPane.rowIndex="5" GridPane.columnIndex="0" />
         <ComboBox fx:id="disciplineCombo" GridPane.rowIndex="5" GridPane.columnIndex="1" />
-
-        <Label text="Artworks:" GridPane.rowIndex="5" GridPane.columnIndex="2" />
-        <TextField fx:id="artworksField" editable="false" GridPane.rowIndex="5" GridPane.columnIndex="3" />
     </GridPane>
 
     <!-- Crud button -->
